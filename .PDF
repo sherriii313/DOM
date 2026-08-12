@@ -1,0 +1,77 @@
+Task: Student Profile DOM Dashboard
+
+Ek simple Student Profile webpage banao.
+
+HTML mein ye hona chahiye:
+Student Profile
+
+Name: Muhammad Shayan
+Course: Web Development
+Status: Learning JavaScript
+
+[ Change Name ]
+[ Change Status ]
+JavaScript requirements:
+
+1. DOM Selection
+
+getElementById() use karke:
+
+Profile container
+Name
+Course
+Status
+Change Name button
+Change Status button
+
+select karo.
+
+2. Change Name
+
+Change Name button click karne par:
+
+Muhammad Shayan
+
+change hokar:
+
+Shayan
+
+ho jaye.
+
+3. Change Status
+
+Button click par:
+
+Learning JavaScript
+
+change hokar:
+
+JavaScript Developer
+
+ho jaye.
+
+4. Paragraphs
+
+Page mein minimum 3 <p> elements rakho.
+
+getElementsByTagName("p") se unko select karo aur console mein show karo.
+
+5. Parent/Child
+
+Profile container ke parent/children identify karo.
+
+Console mein container ke:
+
+childNodes
+
+show karo.
+
+6. Siblings
+
+Student khud identify kare:
+
+Name
+Course
+Status
+
+mein kaun siblings hain aur unka parent kaun hai.
