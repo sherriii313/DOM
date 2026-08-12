@@ -1,4 +1,4 @@
-# DOM
+
 
 document
    |
@@ -9,7 +9,6 @@ head   body
 title   h1
  |       |
 text    text
-
         p
         |
        text
