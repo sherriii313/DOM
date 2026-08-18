@@ -1,14 +1,87 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DOM Practice</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+
+        #box {
+            padding: 30px;
+            margin: 20px;
+            border: 2px solid black;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 
 <body>
 
-    <h1 id="title">Hello Student</h1>
+    <div id="box">
 
-    <p id="message">Learning JavaScript</p>
+        <h1 id="title">Hello World!</h1>
+
+        <p id="para">
+            I am learning JavaScript DOM.
+        </p>
+
+        <button id="changeText">Change Text</button>
+        <button id="redBtn">Red</button>
+        <button id="blueBtn">Blue</button>
+        <button id="darkBtn">Dark Mode</button>
+
+    </div>
+
+
+    <script>
+
+        // Elements ko select karna
+        let title = document.getElementById("title");
+        let para = document.getElementById("para");
+
+        let changeText = document.getElementById("changeText");
+        let redBtn = document.getElementById("redBtn");
+        let blueBtn = document.getElementById("blueBtn");
+        let darkBtn = document.getElementById("darkBtn");
+
+
+        // Change Text button
+        changeText.onclick = function () {
+            title.innerText = "DOM is Easy!";
+            para.innerText = "JavaScript HTML ko control kar rahi hai.";
+        };
+
+
+        // Red button
+        redBtn.onclick = function () {
+            title.style.color = "red";
+        };
+
+
+        // Blue button
+        blueBtn.onclick = function () {
+            title.style.color = "blue";
+        };
+
+
+        // Dark Mode button
+        darkBtn.onclick = function () {
+            document.body.style.backgroundColor = "black";
+            document.body.style.color = "white";
+        };
+
+    </script>
 
 </body>
 </html>
