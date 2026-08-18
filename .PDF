@@ -1,77 +1,52 @@
-Task: Student Profile DOM Dashboard
+# 🎯 DOM Beginner Task — Favorite Color
 
-Ek simple Student Profile webpage banao.
+## 📌 Task
 
-HTML mein ye hona chahiye:
-Student Profile
+Ek simple webpage banao jiska title ho:
 
-Name: Muhammad Shayan
-Course: Web Development
-Status: Learning JavaScript
+**My Favorite Color**
 
-[ Change Name ]
-[ Change Status ]
-JavaScript requirements:
+### HTML mein:
 
-1. DOM Selection
+* Ek `<h1>` banao: `My Favorite Color`
+* Ek `<p>` banao: `Choose your favorite color`
+* 3 buttons banao:
 
-getElementById() use karke:
+  * Red
+  * Blue
+  * Green
 
-Profile container
-Name
-Course
-Status
-Change Name button
-Change Status button
+### JavaScript mein:
 
-select karo.
+JavaScript DOM ka use karke:
 
-2. Change Name
+* Red button click → Heading ka color **red** ho.
+* Blue button click → Heading ka color **blue** ho.
+* Green button click → Heading ka color **green** ho.
 
-Change Name button click karne par:
+### ⭐ Bonus
 
-Muhammad Shayan
+Ek button banao:
 
-change hokar:
+**Change Text**
 
-Shayan
+Us par click karne se heading change ho kar:
+
+`DOM is Easy!`
 
 ho jaye.
 
-3. Change Status
+## 🧠 Use These DOM Concepts
 
-Button click par:
+* `document.getElementById()`
+* `innerText`
+* `style`
+* `onclick`
 
-Learning JavaScript
+### ⏱️ Time
 
-change hokar:
+**30 Minutes**
 
-JavaScript Developer
+### 🎯 Goal
 
-ho jaye.
-
-4. Paragraphs
-
-Page mein minimum 3 <p> elements rakho.
-
-getElementsByTagName("p") se unko select karo aur console mein show karo.
-
-5. Parent/Child
-
-Profile container ke parent/children identify karo.
-
-Console mein container ke:
-
-childNodes
-
-show karo.
-
-6. Siblings
-
-Student khud identify kare:
-
-Name
-Course
-Status
-
-mein kaun siblings hain aur unka parent kaun hai.
+HTML element ko JavaScript se **select karke change karna** seekhna.
