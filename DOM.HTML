@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DOM Practice</title>
+    <title>DOM Next Practice</title>
 
     <style>
         body {
@@ -14,7 +14,6 @@
 
         #box {
             padding: 30px;
-            margin: 20px;
             border: 2px solid black;
         }
 
@@ -30,56 +29,44 @@
 
     <div id="box">
 
-        <h1 id="title">Hello World!</h1>
+        <h1 id="title">Hello Students!</h1>
 
-        <p id="para">
-            I am learning JavaScript DOM.
+        <p class="message">
+            Today we are learning DOM.
         </p>
 
-        <button id="changeText">Change Text</button>
-        <button id="redBtn">Red</button>
-        <button id="blueBtn">Blue</button>
-        <button id="darkBtn">Dark Mode</button>
+        <button id="changeBtn">Change Text</button>
+        <button id="colorBtn">Change Color</button>
 
     </div>
 
 
     <script>
 
-        // Elements ko select karna
-        let title = document.getElementById("title");
-        let para = document.getElementById("para");
+        // Selecting elements using querySelector()
 
-        let changeText = document.getElementById("changeText");
-        let redBtn = document.getElementById("redBtn");
-        let blueBtn = document.getElementById("blueBtn");
-        let darkBtn = document.getElementById("darkBtn");
+        let title = document.querySelector("#title");
+        let message = document.querySelector(".message");
+        let changeBtn = document.querySelector("#changeBtn");
+        let colorBtn = document.querySelector("#colorBtn");
 
 
-        // Change Text button
-        changeText.onclick = function () {
-            title.innerText = "DOM is Easy!";
-            para.innerText = "JavaScript HTML ko control kar rahi hai.";
-        };
+        // addEventListener()
+
+        changeBtn.addEventListener("click", function () {
+
+            title.innerText = "DOM is Fun!";
+
+            message.innerText = "You clicked the button.";
+
+        });
 
 
-        // Red button
-        redBtn.onclick = function () {
-            title.style.color = "red";
-        };
+        colorBtn.addEventListener("click", function () {
 
-
-        // Blue button
-        blueBtn.onclick = function () {
             title.style.color = "blue";
-        };
 
-
-        // Dark Mode button
-        darkBtn.onclick = function () {
-            document.body.style.backgroundColor = "black";
-            document.body.style.color = "white";
-        };
+        });
 
     </script>
 
