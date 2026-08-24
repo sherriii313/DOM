@@ -1,52 +1,8 @@
-# 🎯 DOM Beginner Task — Favorite Color
+“Mini Color Changer” banao:
 
-## 📌 Task
-
-Ek simple webpage banao jiska title ho:
-
-**My Favorite Color**
-
-### HTML mein:
-
-* Ek `<h1>` banao: `My Favorite Color`
-* Ek `<p>` banao: `Choose your favorite color`
-* 3 buttons banao:
-
-  * Red
-  * Blue
-  * Green
-
-### JavaScript mein:
-
-JavaScript DOM ka use karke:
-
-* Red button click → Heading ka color **red** ho.
-* Blue button click → Heading ka color **blue** ho.
-* Green button click → Heading ka color **green** ho.
-
-### ⭐ Bonus
-
-Ek button banao:
-
-**Change Text**
-
-Us par click karne se heading change ho kar:
-
-`DOM is Easy!`
-
-ho jaye.
-
-## 🧠 Use These DOM Concepts
-
-* `document.getElementById()`
-* `innerText`
-* `style`
-* `onclick`
-
-### ⏱️ Time
-
-**30 Minutes**
-
-### 🎯 Goal
-
-HTML element ko JavaScript se **select karke change karna** seekhna.
+Ek heading
+Ek paragraph
+3 buttons: Red, Blue, Green
+querySelector() se elements select karne hain
+addEventListener() se buttons chalane hain
+Button click par heading ka color change hona chahiye.
