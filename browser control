@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browser Control Practice</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 40px;
+        }
+
+        button {
+            padding: 10px 18px;
+            margin: 6px;
+            cursor: pointer;
+        }
+
+        #output {
+            margin-top: 20px;
+            padding: 20px;
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>JavaScript Browser Control</h1>
+
+    <button onclick="getURL()">Get Full URL</button>
+    <button onclick="getDomain()">Get Domain</button>
+    <button onclick="getPath()">Get Path</button>
+    <button onclick="getHash()">Get Anchor</button>
+
+    <br>
+
+    <button onclick="goToGoogle()">Go to Google</button>
+    <button onclick="goToPage()">Go to Page</button>
+
+    <br>
+
+    <button onclick="reloadPage()">Reload</button>
+    <button onclick="goBack()">Back</button>
+    <button onclick="goForward()">Forward</button>
+    <button onclick="goThreeBack()">3 Steps Back</button>
+
+    <br>
+
+    <button onclick="showReferrer()">Show Referrer</button>
+
+    <div id="output">
+        Result will appear here...
+    </div>
+
+
+    <script>
+
+        // ========================================
+        // CHAPTER 76
+        // Getting URL Information
+        // ========================================
+
+        function getURL() {
+
+            var whereWeAt = window.location.href;
+
+            document.getElementById("output").innerHTML =
+                "Full URL: " + whereWeAt;
+        }
+
+
+        function getDomain() {
+
+            var theDomain = window.location.hostname;
+
+            document.getElementById("output").innerHTML =
+                "Domain: " + theDomain;
+        }
+
+
+        function getPath() {
+
+            var thePath = window.location.pathname;
+
+            document.getElementById("output").innerHTML =
+                "Path: " + thePath;
+        }
+
+
+        function getHash() {
+
+            var theAnchor = window.location.hash;
+
+            document.getElementById("output").innerHTML =
+                "Anchor: " + theAnchor;
+        }
+
+
+        // ========================================
+        // Setting / Changing URL
+        // ========================================
+
+        function goToGoogle() {
+
+            window.location.href = "https://www.google.com";
+        }
+
+
+        function goToPage() {
+
+            window.location.href = "https://www.example.com";
+        }
+
+
+        // ========================================
+        // Current Site + Current Path
+        // ========================================
+
+        function currentSitePage() {
+
+            var currentSite = window.location.hostname;
+
+            var currentPath = window.location.pathname;
+
+            var destination =
+                "https://" + currentSite + currentPath + "#section1";
+
+            window.location.href = destination;
+        }
+
+
+        // ========================================
+        // CHAPTER 77
+        // assign()
+        // replace()
+        // reload()
+        // ========================================
+
+        function useAssign() {
+
+            window.location.assign("https://www.google.com");
+        }
+
+
+        function useReplace() {
+
+            window.location.replace("https://www.google.com");
+        }
+
+
+        function reloadPage() {
+
+            window.location.reload();
+        }
+
+
+        // ========================================
+        // CHAPTER 78
+        // Browser History
+        // ========================================
+
+        function goBack() {
+
+            history.back();
+        }
+
+
+        function goForward() {
+
+            history.forward();
+        }
+
+
+        function goThreeBack() {
+
+            history.go(-3);
+        }
+
+
+        // ========================================
+        // REFERRER
+        // ========================================
+
+        function showReferrer() {
+
+            var whereUserCameFrom = document.referrer;
+
+            if (whereUserCameFrom === "") {
+
+                document.getElementById("output").innerHTML =
+                    "No referrer available.";
+
+            } else {
+
+                document.getElementById("output").innerHTML =
+                    "User came from: " + whereUserCameFrom;
+            }
+        }
+
+    </script>
+
+</body>
+</html>
