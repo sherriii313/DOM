@@ -42,3 +42,123 @@ history.go(2)
 
 // Previous/source URL
 document.referrer
+
+
+
+
+Topic
+
+window.location + history + document.referrer
+
+📌 Rules
+Sirf HTML + JavaScript use karna hai.
+Har task khud code karke complete karna hai.
+console.log() aur alert() dono use kar sakte ho.
+Google se code copy nahi karna 😄
+
+Task 1 — Full URL
+
+Ek HTML page banao.
+
+JavaScript se current full URL nikalo aur alert() mein show karo.
+
+Hint:
+
+window.location.href
+🟢 Task 2 — Domain
+
+Current website ka sirf domain name show karo.
+
+Example:
+
+Domain: localhost
+
+Hint:
+
+window.location.hostname
+🟢 Task 3 — Path
+
+Current page ka pathname console mein print karo.
+
+Hint:
+
+window.location.pathname
+🟢 Task 4 — Hash
+
+URL mein manually #about add karo:
+
+http://localhost:5500/#about
+
+JavaScript se #about nikalo.
+
+Hint:
+
+window.location.hash
+🟡 Task 5 — Button se Google
+
+Ek button banao:
+
+Go to Google
+
+Button click karne par Google open hona chahiye.
+
+Hint:
+
+window.location.href = "https://www.google.com";
+🟡 Task 6 — Reload Button
+
+Ek button:
+
+Reload Page
+
+Click karne par current webpage reload ho.
+
+Hint:
+
+window.location.reload();
+🟡 Task 7 — Back & Forward
+
+Do buttons banao:
+
+⬅ Back
+Forward ➡
+
+Back button:
+
+history.back();
+
+Forward button:
+
+history.forward();
+🟠 Task 8 — History Challenge
+
+Teen buttons banao:
+
+Back 1
+Back 2
+Forward 1
+
+Requirements:
+
+Back 1 → 1 page back
+Back 2 → 2 pages back
+Forward 1 → 1 page forward
+
+history.go() use karna hai.
+
+
+========================
+     Browser Info
+========================
+
+Full URL: __________
+
+Domain: __________
+
+Path: __________
+
+Anchor: __________
+
+[ Reload ]
+
+[ Back ] [ Forward ]
