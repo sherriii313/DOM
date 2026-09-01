@@ -1,0 +1,6 @@
+| JavaScript          | Result                |
+| ------------------- | --------------------- |
+| `location.href`     | Full URL              |
+| `location.hostname` | `www.example.com`     |
+| `location.pathname` | `/products/page.html` |
+| `location.hash`     | `#mobile`             |
