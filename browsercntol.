@@ -4,3 +4,41 @@
 | `location.hostname` | `www.example.com`     |
 | `location.pathname` | `/products/page.html` |
 | `location.hash`     | `#mobile`             |
+
+
+// Full URL
+window.location.href
+
+// Domain
+window.location.hostname
+
+// Path
+window.location.pathname
+
+// #anchor
+window.location.hash
+
+// New URL
+window.location.href = "https://google.com"
+
+// Navigation
+window.location.assign("https://google.com")
+
+// Replace current history entry
+window.location.replace("https://google.com")
+
+// Reload
+window.location.reload()
+
+// Back
+history.back()
+
+// Forward
+history.forward()
+
+// Multiple history steps
+history.go(-3)
+history.go(2)
+
+// Previous/source URL
+document.referrer
