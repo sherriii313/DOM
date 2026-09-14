@@ -1,1 +1,157 @@
-<!DOCTYPE html> <html> <head> <title>Student Form</title> </head> <body> <h2>Student Registration</h2> <form onsubmit="return checkForm()"> <!-- Chapter 82: Text Field --> <label>Name:</label> <input type="text" id="name" placeholder="Enter your name"> <br><br> <!-- Chapter 83: Dropdown --> <label>City:</label> <select id="city"> <option value="">Select City</option> <option value="Karachi">Karachi</option> <option value="Lahore">Lahore</option> <option value="Islamabad">Islamabad</option> </select> <br><br> <!-- Chapter 84: Radio Button --> <label>Gender:</label> <input type="radio" name="gender" value="Male"> Male <input type="radio" name="gender" value="Female"> Female <br><br> <button type="submit">Register</button> </form> <script> function checkForm() { // Chapter 82 let name = document.getElementById("name").value; if (name.length === 0) { alert("Please enter your name"); return false; } // Chapter 83 let city = document.getElementById("city").value; if (city === "") { alert("Please select your city"); return false; } // Chapter 84 let gender = document.getElementsByName("gender"); if (!gender[0].checked && !gender[1].checked) { alert("Please select your gender"); return false; } alert("Registration Successful!"); return false; } </script> </body> </html>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Student Form</title>
+</head>
+
+<body>
+
+    <h2>Student Registration</h2>
+
+    <form onsubmit="return checkForm()">
+
+        <!-- Chapter 82: Text Field -->
+
+        <label>Name:</label>
+
+        <input
+            type="text"
+            id="name"
+            placeholder="Enter your name"
+        >
+
+        <br><br>
+
+
+        <!-- Chapter 83: Dropdown -->
+
+        <label>City:</label>
+
+        <select id="city">
+
+            <option value="">
+                Select City
+            </option>
+
+            <option value="Karachi">
+                Karachi
+            </option>
+
+            <option value="Lahore">
+                Lahore
+            </option>
+
+            <option value="Islamabad">
+                Islamabad
+            </option>
+
+        </select>
+
+        <br><br>
+
+
+        <!-- Chapter 84: Radio Button -->
+
+        <label>Gender:</label>
+
+        <input
+            type="radio"
+            name="gender"
+            value="Male"
+        >
+
+        Male
+
+
+        <input
+            type="radio"
+            name="gender"
+            value="Female"
+        >
+
+        Female
+
+        <br><br>
+
+
+        <button type="submit">
+            Register
+        </button>
+
+    </form>
+
+
+    <script>
+
+        function checkForm() {
+
+
+            // Chapter 82
+            // Name ko input se lena
+
+            let name =
+                document.getElementById("name").value;
+
+
+            // Name check karna
+
+            if (name.length === 0) {
+
+                alert("Please enter your name");
+
+                return false;
+            }
+
+
+            // Chapter 83
+            // City ko dropdown se lena
+
+            let city =
+                document.getElementById("city").value;
+
+
+            // City check karna
+
+            if (city === "") {
+
+                alert("Please select your city");
+
+                return false;
+            }
+
+
+            // Chapter 84
+            // Gender ke dono radio buttons lena
+
+            let gender =
+                document.getElementsByName("gender");
+
+
+            // Check karna ke koi gender select hua ya nahi
+
+            if (
+                !gender[0].checked &&
+                !gender[1].checked
+            ) {
+
+                alert("Please select your gender");
+
+                return false;
+            }
+
+
+            // Sab kuch correct hai
+
+            alert("Registration Successful!");
+
+
+            return false;
+
+        }
+
+    </script>
+
+</body>
+
+</html>
