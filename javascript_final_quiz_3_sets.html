@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>JavaScript Final Quiz</title>
+<style>
+*{box-sizing:border-box} body{margin:0;font-family:Arial,sans-serif;background:#f3f4f6;color:#111}
+.wrap{max-width:900px;margin:30px auto;padding:18px}.card{background:white;border-radius:16px;padding:24px;box-shadow:0 8px 30px #0001}
+h1{margin-top:0}.muted{color:#666}.row{display:flex;gap:12px;flex-wrap:wrap}
+input,button{font:inherit;padding:12px;border-radius:10px;border:1px solid #ccc}
+button{cursor:pointer;background:#111;color:#fff;border:0}.hidden{display:none}
+.opt{display:block;width:100%;text-align:left;background:#fff;color:#111;border:1px solid #ddd;margin:10px 0}
+.opt.selected{border:2px solid #111;background:#eee}
+.top{display:flex;justify-content:space-between;gap:12px;position:sticky;top:0;background:white;padding-bottom:12px}
+.bad{color:#b00020;font-weight:bold}.progress{height:8px;background:#ddd;border-radius:9px;overflow:hidden}.bar{height:100%;background:#111;width:0}
+pre{white-space:pre-wrap;background:#f5f5f5;padding:10px;border-radius:8px}
+</style>
+</head>
+<body oncontextmenu="return false">
+<div class="wrap">
+<div id="start" class="card">
+<h1>JavaScript Final Quiz</h1>
+<p class="muted">40 MCQs • No Local Storage • JavaScript fundamentals through forms, DOM, browser control and exceptions.</p>
+<div class="row">
+<input id="student" placeholder="Student name" autocomplete="off">
+<input id="code" placeholder="Student code" autocomplete="off">
+</div>
+<p class="muted">Teacher: give each student a different code. Example: JS-A1, JS-B1, JS-C1.</p>
+<button onclick="begin()">Start Quiz</button>
+<p id="msg" class="bad"></p>
+</div>
+
+<div id="quiz" class="card hidden">
+<div class="top"><b id="counter"></b><b id="timer">30:00</b></div>
+<div class="progress"><div id="bar" class="bar"></div></div>
+<div id="question"></div>
+<div id="options"></div>
+<div class="row">
+<button onclick="prev()">Previous</button>
+<button onclick="next()">Next</button>
+<button onclick="submitQuiz()">Submit Quiz</button>
+</div>
+<p id="warning" class="bad"></p>
+</div>
+
+<div id="result" class="card hidden"></div>
+</div>
+
+<script>
+const SETS = [[{"q": "Which keyword creates a variable whose value can be reassigned?", "o": ["let", "const", "static", "fixed"], "a": 0}, {"q": "What does parseInt('25') return?", "o": ["25", "'25'", "2.5", "NaN"], "a": 0}, {"q": "Which method gets the month from a Date object?", "o": ["getMonth()", "month()", "getDateMonth()", "readMonth()"], "a": 0}, {"q": "What is the result of 10 % 3?", "o": ["1", "3", "0", "10"], "a": 0}, {"q": "What does getDate() return from a Date object?", "o": ["The day of the month", "The year", "The month index", "The weekday name"], "a": 0}, {"q": "Which method selects an element by its id?", "o": ["getElementById()", "getByIdOnly()", "selectId()", "findId()"], "a": 0}, {"q": "Which keyword defines a function?", "o": ["function", "def", "func", "method"], "a": 0}, {"q": "What is the value of x after this code? let x = 5; x += 3;", "o": ["8", "2", "15", "53"], "a": 0}, {"q": "Which method changes a string to uppercase?", "o": ["toUpperCase()", "upper()", "makeUpper()", "capitalizeAll()"], "a": 0}, {"q": "Which method creates a new DOM element?", "o": ["createElement()", "newElement()", "makeNode()", "createTag()"], "a": 0}, {"q": "What is the first index of a string character in JavaScript?", "o": ["0", "1", "-1", "The string length"], "a": 0}, {"q": "What does document.getElementById('box').style.color = 'red'; change?", "o": ["The element's inline text color", "The page title", "The element's value", "The browser URL"], "a": 0}, {"q": "Which keyword marks a branch inside switch?", "o": ["case", "branch", "option", "when"], "a": 0}, {"q": "Which method finds the position of a substring?", "o": ["indexOf()", "findText()", "searchAt()", "position()"], "a": 0}, {"q": "What is the index of the first element in a JavaScript array?", "o": ["0", "1", "-1", "2"], "a": 0}, {"q": "What is the result of '5' + 2 in JavaScript?", "o": ["'52'", "7", "'7'", "3"], "a": 0}, {"q": "After let a=[1,2,3]; a.pop(); what remains?", "o": ["[1,2]", "[2,3]", "[1,2,3]", "[1]"], "a": 0}, {"q": "After let a=[1,2]; a.push(3); what is a.length?", "o": ["3", "2", "4", "1"], "a": 0}, {"q": "Which loop always executes its body at least once before checking its condition?", "o": ["do...while", "while", "forEachOnly", "if"], "a": 0}, {"q": "What is form validation used for?", "o": ["Checking user input before accepting/submitting it", "Styling a form", "Opening a popup", "Changing a URL"], "a": 0}, {"q": "What does break do inside a loop?", "o": ["Stops the loop", "Skips only the current statement", "Starts the loop again", "Creates a function"], "a": 0}, {"q": "If let x = 10; if (x > 5) x = 20; what is x?", "o": ["20", "10", "5", "undefined"], "a": 0}, {"q": "If let name='Ali'; name='Sara'; what is name?", "o": ["'Sara'", "'Ali'", "'AliSara'", "undefined"], "a": 0}, {"q": "Which comparison operator checks equality without type coercion?", "o": ["===", "==", "=", "!="], "a": 0}, {"q": "Which method adds an element to the end of an array?", "o": ["push()", "pop()", "shift()", "slice()"], "a": 0}, {"q": "Which method controls the number of digits after the decimal point in a string result?", "o": ["toFixed()", "fixed()", "decimalPlaces()", "roundText()"], "a": 0}, {"q": "Which method can replace part of a string?", "o": ["replace()", "swapText()", "change()", "rewrite()"], "a": 0}, {"q": "Which statement can catch an error thrown inside try?", "o": ["catch", "error", "handle", "except"], "a": 0}, {"q": "Where can an event handler be assigned in JavaScript?", "o": ["To an element's event property", "Only to CSS", "Only to a database", "Only to an array"], "a": 0}, {"q": "Which value is a string?", "o": ["42", "true", "'42'", "42.5"], "a": 2}, {"q": "What does (8).toFixed(2) produce?", "o": ["'8.00'", "8.2", "'8.2'", "'8'"], "a": 0}, {"q": "In a form, what does return false from a submit handler commonly do?", "o": ["Prevent the submission from proceeding", "Reload twice", "Open a popup", "Clear all JavaScript"], "a": 0}, {"q": "Which expression is evaluated first because of parentheses?", "o": ["(2 + 3) * 4", "2 + 3 * 4", "2 + 3 / 4", "2 % 3 + 4"], "a": 0}, {"q": "What does window.location.pathname represent?", "o": ["The path portion of the current URL", "Only the protocol", "Only the domain", "The browser history length"], "a": 0}, {"q": "Which function generates a random number from 0 up to but not including 1?", "o": ["Math.random()", "Math.rand()", "random.number()", "Math.generate()"], "a": 0}, {"q": "Which DOM property is commonly used to read the value entered in a text input?", "o": ["value", "textContent", "innerHTML", "inputText"], "a": 0}, {"q": "Which property gives the number of elements in an array?", "o": ["length", "size", "count", "items"], "a": 0}, {"q": "What does Math.random() return before scaling?", "o": ["A number from 0 inclusive to 1 exclusive", "Only integers 1 to 10", "A number from 1 to 100 inclusive", "A Boolean"], "a": 0}, {"q": "Which method removes the last element of an array?", "o": ["pop()", "push()", "unshift()", "splice()"], "a": 0}, {"q": "Which literal creates an array?", "o": ["[1, 2, 3]", "{1, 2, 3}", "(1, 2, 3)", "<1, 2, 3>"], "a": 0}], [{"q": "What happens when an error is thrown inside try and a matching catch exists?", "o": ["Control moves to catch", "The error is ignored automatically", "The browser always closes", "The loop restarts"], "a": 0}, {"q": "Which code reads the value of a radio button with id male?", "o": ["document.getElementById('male').value", "document.getElementById('male').textContent only", "radio.valueOf('male')", "document.radio.maleText"], "a": 0}, {"q": "Which loop checks its condition before each iteration?", "o": ["while", "do...while", "repeat", "until"], "a": 0}, {"q": "Which keyword is used to create an object with a constructor function?", "o": ["new", "make", "object", "create"], "a": 0}, {"q": "What does window.location.hostname provide?", "o": ["The host/domain name", "The URL path", "The protocol only", "The query string only"], "a": 0}, {"q": "Which property can change an element's inline CSS style?", "o": ["style", "css", "design", "format"], "a": 0}, {"q": "What does window.open() attempt to do?", "o": ["Open a new browsing context", "Close the current browser", "Change an input value", "Create an array"], "a": 0}, {"q": "Which property can change the text inside an element without parsing HTML?", "o": ["textContent", "styleText", "nodeValueOnly", "innerTextHTML"], "a": 0}, {"q": "Which structure is useful for testing several alternative conditions?", "o": ["if...else if...else", "for...only", "array...else", "try...repeat"], "a": 0}, {"q": "What does this loop print? for(let i=0;i<3;i++){console.log(i)}", "o": ["0, 1, 2", "1, 2, 3", "0, 1, 2, 3", "3 only"], "a": 0}, {"q": "Which property gives the current page URL?", "o": ["window.location.href", "window.url.current", "document.pageURL", "browser.href"], "a": 0}, {"q": "What does an if statement do?", "o": ["Runs code when its condition is true", "Always repeats code", "Creates an array", "Defines a function"], "a": 0}, {"q": "Which loop is commonly used to repeat code a known number of times?", "o": ["for", "if", "switch", "catch"], "a": 0}, {"q": "If function add(a,b){return a+b;} what is add(2,3)?", "o": ["5", "23", "6", "undefined"], "a": 0}, {"q": "What does return 7; do inside a function?", "o": ["Returns 7 to the caller", "Prints 7 automatically", "Repeats 7 times", "Creates a variable"], "a": 0}, {"q": "What does Number('hello') produce?", "o": ["NaN", "0", "false", "'hello'"], "a": 0}, {"q": "Which method opens a new browser window or tab when allowed?", "o": ["window.open()", "window.new()", "browser.open()", "page.openNew()"], "a": 0}, {"q": "What does 'JavaScript'.length return?", "o": ["10", "9", "11", "8"], "a": 0}, {"q": "What is the value of arr[1] for let arr = ['a','b','c'];?", "o": ["'b'", "'a'", "'c'", "undefined"], "a": 0}, {"q": "A variable declared inside a function is normally what?", "o": ["Local to that function", "Global to every script", "An array", "A property of Date"], "a": 0}, {"q": "What does Math.floor(4.9) return?", "o": ["4", "5", "4.9", "0"], "a": 0}, {"q": "What does 'Hello ' + 'World' produce?", "o": ["Hello World", "HelloWorld", "Hello + World", "World Hello"], "a": 0}, {"q": "What is the result of 5 + 2?", "o": ["7", "52", "10", "3"], "a": 0}, {"q": "Which statement begins a switch structure?", "o": ["switch(value)", "choose(value)", "case(value)", "select(value)"], "a": 0}, {"q": "Which value represents true or false?", "o": ["Boolean", "String", "Array", "Date"], "a": 0}, {"q": "If const x=5; which action is invalid?", "o": ["Assigning x = 6", "Reading x", "Using x in an expression", "Declaring x"], "a": 0}, {"q": "What does document.getElementById('title').textContent = 'Hi'; do?", "o": ["Changes the element's text content to Hi", "Reads the title's value", "Changes the URL", "Creates a new element"], "a": 0}, {"q": "Which method moves the browser back one page in history?", "o": ["history.back()", "window.previous()", "location.reverse()", "browser.backPage()"], "a": 0}, {"q": "Which method rounds a number to the nearest integer?", "o": ["Math.round()", "Math.nearest()", "Math.integer()", "Math.floorRound()"], "a": 0}, {"q": "Which statement displays a message in a browser alert box?", "o": ["alert('Hello');", "prompt('Hello');", "console('Hello');", "message('Hello');"], "a": 0}, {"q": "What does DOM stand for?", "o": ["Document Object Model", "Data Object Method", "Document Output Mode", "Dynamic Object Manager"], "a": 0}, {"q": "What does 'cat'.charAt(1) return?", "o": ["'a'", "'c'", "'t'", "'ca'"], "a": 0}, {"q": "How many times does while(i<3) run if i starts at 0 and increases by 1 each loop?", "o": ["3", "2", "4", "0"], "a": 0}, {"q": "What does throw 'Bad input'; do?", "o": ["Creates an exception with that value", "Prints a warning only", "Stops all browsers", "Creates a variable named Bad"], "a": 0}, {"q": "Which object provides the current date and time?", "o": ["Date", "Time", "Now", "Calendar"], "a": 0}, {"q": "Which method targets all elements with a given tag name?", "o": ["getElementsByTagName()", "getAllTags()", "findTags()", "selectTagOnly()"], "a": 0}, {"q": "What does window.history.forward() attempt to do?", "o": ["Move forward in session history", "Reload the page", "Open a popup", "Clear the history"], "a": 0}, {"q": "Which keyword handles the alternative branch of an if statement?", "o": ["else", "otherwise", "then", "switch"], "a": 0}, {"q": "What does 'hello'.toUpperCase() return?", "o": ["'HELLO'", "'Hello'", "'hello'", "'hello'.toUpper"], "a": 0}, {"q": "What does prompt() normally return?", "o": ["User-entered text", "A number only", "A Boolean only", "An array"], "a": 0}], [{"q": "What does document.getElementById('box').value read when box is a text input?", "o": ["The input's current value", "The element's tag name", "The page URL", "The element's CSS class"], "a": 0}, {"q": "Which code correctly reads a selected dropdown option's value?", "o": ["document.getElementById('city').value", "document.getElementById('city').text", "city.selectedText()", "document.city.option"], "a": 0}, {"q": "If let x=1; let y=2; console.log(x+y); what is displayed?", "o": ["3", "12", "1+2", "undefined"], "a": 0}, {"q": "What does Number('25') return?", "o": ["25", "'25'", "NaN", "true"], "a": 0}, {"q": "What does % return?", "o": ["The remainder", "The percentage symbol", "The quotient", "The exponent"], "a": 0}, {"q": "Which condition checks whether a text field is empty? if (name === '')", "o": ["It tests for an empty string", "It tests whether name is a number", "It creates a new string", "It converts name to Boolean"], "a": 0}, {"q": "Which operator is used for addition in JavaScript?", "o": ["+", "*", "%", "/"], "a": 0}, {"q": "Which function converts a numeric string to an integer?", "o": ["parseInt()", "parseIntegerText()", "toIntegerText()", "int()"], "a": 0}, {"q": "What does 'abcdef'.indexOf('cd') return?", "o": ["2", "3", "1", "-1"], "a": 0}, {"q": "Which keyword manually generates an exception?", "o": ["throw", "raiseError", "error", "except"], "a": 0}, {"q": "What does getFullYear() return from a Date object?", "o": ["The year", "The month name", "The day of the month", "The hour"], "a": 0}, {"q": "What is a prototype mainly useful for in constructor-based objects?", "o": ["Sharing methods/properties through the prototype", "Creating HTML files", "Opening a popup", "Reading a URL"], "a": 0}, {"q": "Which event commonly occurs when a button is clicked?", "o": ["click", "hovered", "pressedOnly", "selected"], "a": 0}, {"q": "What does return do in a function?", "o": ["Sends a value back to the caller", "Repeats the function", "Creates a loop", "Stops the browser"], "a": 0}, {"q": "In the DOM, an element can have what relationship to another element?", "o": ["Parent and child", "Only sibling", "Only owner", "Only server"], "a": 0}]];
+let questions=[], index=0, answers=[], student="", started=false, seconds=1800, timerId=null, switches=0;
+
+function pickSet(code){
+  let n=0; for(let i=0;i<code.length;i++) n=(n+code.charCodeAt(i)*(i+1))%100000;
+  return n%SETS.length;
+}
+function begin(){
+  student=document.getElementById("student").value.trim();
+  const code=document.getElementById("code").value.trim();
+  if(!student||!code){document.getElementById("msg").textContent="Name and student code are required.";return}
+  questions=SETS[pickSet(code)].map(x=>({...x})).sort(()=>Math.random()-.5);
+  questions.forEach(q=>{let pairs=q.o.map((x,i)=>({x,i})).sort(()=>Math.random()-.5); q.o=pairs.map(p=>p.x); q.a=pairs.findIndex(p=>p.i===q.a)});
+  answers=new Array(questions.length).fill(null);
+  document.getElementById("start").classList.add("hidden");
+  document.getElementById("quiz").classList.remove("hidden");
+  started=true; render(); fullscreen(); timerId=setInterval(tick,1000);
+}
+function render(){
+  const q=questions[index]; document.getElementById("counter").textContent=`Question ${index+1} / ${questions.length}`;
+  document.getElementById("bar").style.width=((index+1)/questions.length*100)+"%";
+  document.getElementById("question").innerHTML=`<h2>${escapeHtml(q.q)}</h2>`;
+  const box=document.getElementById("options"); box.innerHTML="";
+  q.o.forEach((o,i)=>{let b=document.createElement("button");b.className="opt"+(answers[index]===i?" selected":"");b.textContent=String.fromCharCode(65+i)+". "+o;b.onclick=()=>{answers[index]=i;render()};box.appendChild(b)});
+}
+function next(){if(index<questions.length-1){index++;render()}}
+function prev(){if(index>0){index--;render()}}
+function tick(){seconds--;let m=String(Math.floor(seconds/60)).padStart(2,"0"),s=String(seconds%60).padStart(2,"0");document.getElementById("timer").textContent=m+":"+s;if(seconds<=0)submitQuiz(true)}
+function submitQuiz(auto=false){
+ if(!started)return;
+ clearInterval(timerId); started=false;
+ let score=answers.reduce((n,a,i)=>n+(a===questions[i].a?1:0),0);
+ let pct=Math.round(score/questions.length*100);
+ document.getElementById("quiz").classList.add("hidden");
+ document.getElementById("result").classList.remove("hidden");
+ document.getElementById("result").innerHTML=`<h1>Quiz Complete</h1><p><b>Student:</b> ${escapeHtml(student)}</p><h2>${score} / ${questions.length}</h2><p>${pct}%</p><p>${auto?"Time ended automatically.":"Submitted successfully."}</p><button onclick="window.print()">Print Result</button>`;
+}
+function fullscreen(){document.documentElement.requestFullscreen?.().catch(()=>{})}
+function escapeHtml(s){return s.replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]))}
+document.addEventListener("visibilitychange",()=>{if(started&&document.hidden){switches++;document.getElementById("warning").textContent="Warning: tab/window switching detected. Switches: "+switches}});
+document.addEventListener("copy",e=>e.preventDefault());
+document.addEventListener("cut",e=>e.preventDefault());
+document.addEventListener("paste",e=>e.preventDefault());
+document.addEventListener("keydown",e=>{
+ if((e.ctrlKey||e.metaKey)&&["c","v","x","u","s","p"].includes(e.key.toLowerCase()))e.preventDefault();
+ if(e.key==="F12")e.preventDefault();
+});
+</script>
+</body>
+</html>
